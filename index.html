@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Reproductor Fullscreen</title>
+  <script src="//cdn.jsdelivr.net/npm/@clappr/player@0.8/dist/clappr.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/@swarmcloud/hls/p2p-engine.min.js"></script>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      background: #000;
+      overflow: hidden;
+    }
+    #player {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #000;
+    }
+    /* Ajuste de la barra */
+    .media-control[data-media-control] 
+    .media-control-layer[data-controls] 
+    .bar-container[data-seekbar] 
+    .bar-background[data-seekbar] {
+      height: 5px !important;
+    }
+    .media-control[data-media-control] 
+    .media-control-layer[data-controls] 
+    .bar-container[data-seekbar]:hover 
+    .bar-background[data-seekbar] {
+      height: 7px !important;
+    }
+  </style>
+</head>
+<body>
+  <div id="player"></div>
+
+  <script>
+    // Lista de URLs de tus streams
+    const canales = {
+      "espn": "https://aw1wcm92zq.fubohd.com:443/espn/mono.m3u8?token=a9d23b13112392cd228dfe0a8db553a2e193eebc-dd-1757567006-1757549006",
+      "espn2": "https://aw1wcm92zq.fubohd.com:443/espn2/mono.m3u8?token=xxxx",
+      "tudn": "https://aw1wcm92zq.fubohd.com:443/tudn/mono.m3u8?token=xxxx",
+      "dsports": "https://aw1wcm92zq.fubohd.com:443/dsports/mono.m3u8?token=xxxx"
+    };
+
+    // Obtener parámetro de la URL (?play=espn)
+    const params = new URLSearchParams(window.location.search);
+    const canalParam = params.get("play") || "espn";
+    const playbackURL = canales[canalParam] || canales["espn"];
+
+    // Codificar URL en Base64 y actualizar la barra de navegación
+    const base64URL = btoa(playbackURL);
+    const nuevaURL = window.location.origin + window.location.pathname + "?r=" + base64URL;
+    window.history.replaceState({}, "", nuevaURL);
+
+    // Configuración P2P
+    const p2pConfig = {
+      live: true,
+      trackerZone: "us"
+    };
+
+    P2PEngineHls.tryRegisterServiceWorker(p2pConfig).then(() => {
+      const player = new Clappr.Player({
+        source: playbackURL,
+        parentId: "#player",
+        width: "100%",
+        height: "100%",
+        autoPlay: true,
+        mediacontrol: { seekbar: "#D4ED31", buttons: "#FFFFFF" }
+      });
+      p2pConfig.hlsjsInstance = player.core.getCurrentPlayback()?._hls;
+      const engine = new P2PEngineHls(p2pConfig);
+    });
+  </script>
+
+  <!-- Bloqueador de anuncios -->
+  <script src="https://ads.tiogol.com/block.js?v=1.1"></script>
+</body>
+</html>
