@@ -301,6 +301,16 @@
   playerContainer.addEventListener('msfullscreenchange', () => {
     if (document.msFullscreenElement) lockLandscape();
   });
+    const logo = document.getElementById('logo');
+
+document.addEventListener('fullscreenchange', () => {
+  if (document.fullscreenElement) {
+    document.fullscreenElement.appendChild(logo);
+  } else {
+    document.body.appendChild(logo); // volver a su lugar cuando se salga
+  }
+});
+
 </script>
 
 
