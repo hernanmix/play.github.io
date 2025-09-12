@@ -210,21 +210,33 @@
       "espn4": ""    
       };
 
-    // Obtener parámetro de la URL (?play=espn)
-    const params = new URLSearchParams(window.location.search);
-    const canalParam = params.get("play") || "espn";
-    const playbackURL = canales[canalParam] || canales["espn"];
+    // Obtener parámetros de la URL
+  const params = new URLSearchParams(window.location.search);
+  const playParam = params.get("play");
+  const rParam = params.get("r");
 
-    // Codificar URL en Base64 y actualizar la barra de navegación
-    const base64URL = btoa(playbackURL);
-    const nuevaURL = window.location.origin + window.location.pathname + "?r=" + base64URL;
-    window.history.replaceState({}, "", nuevaURL);
+  let playbackURL = "";
 
+  if (rParam) {
+    // Si viene en Base64 → decodificar
+    playbackURL = atob(rParam);
+  } else if (playParam) {
+    // Si viene como texto → buscar en la lista
+    playbackURL = canales[playParam] || "";
+    // Opcional: actualizar la URL a formato Base64
+    if (playbackURL) {
+      const base64URL = btoa(playbackURL);
+      const nuevaURL = window.location.origin + window.location.pathname + "?r=" + base64URL;
+      window.history.replaceState({}, "", nuevaURL);
+    }
+  }
+
+  // Si no hay URL válida, mostrar error
+  if (!playbackURL) {
+    document.body.innerHTML = "<h2 style='color:white;text-align:center;margin-top:20%'>Canal no disponible</h2>";
+  } else {
     // Configuración P2P
-    const p2pConfig = {
-      live: true,
-      trackerZone: "us"
-    };
+    const p2pConfig = { live: true, trackerZone: "us" };
 
     P2PEngineHls.tryRegisterServiceWorker(p2pConfig).then(() => {
       const player = new Clappr.Player({
@@ -238,6 +250,7 @@
       p2pConfig.hlsjsInstance = player.core.getCurrentPlayback()?._hls;
       const engine = new P2PEngineHls(p2pConfig);
     });
+  }
   </script>
 
   <!-- Bloqueador de anuncios -->
