@@ -273,6 +273,39 @@
   }
   </script>
 
+  <script>
+  // Detectar cuando Clappr entra en fullscreen
+  const playerContainer = document.getElementById('player');
+
+  // Función para forzar landscape en fullscreen
+  function lockLandscape() {
+    if (screen.orientation && screen.orientation.lock) {
+      screen.orientation.lock('landscape').catch(err => {
+        console.log('No se pudo bloquear orientación:', err);
+      });
+    }
+  }
+
+  // Escuchar eventos de fullscreen
+  playerContainer.addEventListener('fullscreenchange', () => {
+    if (document.fullscreenElement) {
+      lockLandscape(); // intento de bloquear horizontal
+    }
+  });
+
+  // Para Chrome/Safari antiguos
+  playerContainer.addEventListener('webkitfullscreenchange', () => {
+    if (document.webkitFullscreenElement) lockLandscape();
+  });
+  playerContainer.addEventListener('mozfullscreenchange', () => {
+    if (document.mozFullScreenElement) lockLandscape();
+  });
+  playerContainer.addEventListener('msfullscreenchange', () => {
+    if (document.msFullscreenElement) lockLandscape();
+  });
+</script>
+
+
   <!-- Bloqueador de anuncios -->
   <script src="https://ads.tiogol.com/block.js?v=1.1"></script>
 </body>
