@@ -2,8 +2,10 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>HSPORTSHD-TRAAMISIÓN EN VIVO</title>
+  <title>HSPORTSHD - Transmisión en Vivo</title>
+  <!-- Clappr -->
   <script src="https://cdn.jsdelivr.net/npm/@clappr/player@0.8/dist/clappr.min.js"></script>
+  <!-- P2P (opcional, no bloquea si falla) -->
   <script src="https://cdn.jsdelivr.net/npm/@swarmcloud/hls/p2p-engine.min.js"></script>
   <style>
     html, body {
@@ -15,28 +17,26 @@
       overflow: hidden;
     }
     #player {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: #000;
-}
-
-#logo {
-  position: absolute; /* importante: ahora dentro del player */
-  top: 10px;
-  right: 80px;
-  z-index: 9999;
-}
-
-#logo img {
-  width: 80px;
-  height: auto;
-  opacity: 0.9;
-}
-}
-    /* Ajuste de la barra */
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #000;
+    }
+    /* Logo dentro del reproductor */
+    #logo {
+      position: absolute;
+      top: 10px;
+      right: 80px;
+      z-index: 9999;
+    }
+    #logo img {
+      width: 80px;
+      height: auto;
+      opacity: 0.9;
+    }
+    /* Ajustes barra de progreso */
     .media-control[data-media-control] 
     .media-control-layer[data-controls] 
     .bar-container[data-seekbar] 
@@ -48,217 +48,42 @@
     .bar-container[data-seekbar]:hover 
     .bar-background[data-seekbar] {
       height: 7px !important;
-      
+    }
   </style>
 </head>
 <body>
   <div id="player">
-  <!-- Logo flotante dentro del reproductor -->
-  <div id="logo">
-    <img src="https://i.ibb.co/sJmvqM4T/1000170748.png" alt="Logo">
+    <!-- Logo flotante -->
+    <div id="logo">
+      <img src="https://i.ibb.co/sJmvqM4T/1000170748.png" alt="Logo">
+    </div>
   </div>
-</div>
-
 
   <script>
-    // Lista de URLs de tus streams
+    // Lista de canales
     const canales = {
-      "espn": "https://14c51.crackstreamslivehd.com:443/espn/tracks-v1a1/mono.m3u8?ip=45.224.153.13&token=aaaeb0139a63bacdff43f58c5c469c7e7024b651-59-1757898266-1757844266",
-      "espn2": "https://anvtcax.fubohd.com:443/espn2/mono.m3u8?token=6b62c80f81be83bbfc0a8afa73bf21cc665073a9-25-1757694528-1757676528",
-      "espn3": "https://ym9yzq.fubohd.com:443/espn3/mono.m3u8?token=633f413f6c30e8737cfb8eb838aff3f94e363cf6-53-1757694559-1757676559",
-      "espn4": "https://a2vlca.fubohd.com:443/espn4/mono.m3u8?token=3b5bee88ed3de378e699bab084da759b4fa9c826-e2-1757694591-1757676591",
-      "espn5": "https://a2vlca.fubohd.com:443/espn4/mono.m3u8?token=3b5bee88ed3de378e699bab084da759b4fa9c826-e2-1757694591-1757676591",
-      "espn6": "",
-      "espn7": "",
-      "Dsports": "https://florcd1.crackstreamslivehd.com/dsports/tracks-v1a1/mono.m3u8?ip=45.224.153.13&token=48aede356ec4d781b60ae5b411d2129ca1d4996b-33-1757913873-1757859873",
-      "Dsports2": "",
-      "Dsportsplus": "",
-      "goltv": "https://24a1.crackstreamslivehd.com/goltv/tracks-v1a1/mono.m3u8?ip=45.224.153.13&token=67af73972a5fb2ac15d57edcf383d19f68c9a3f2-f0-1757899138-1757845138",
-      "vtvplus": "",
-      "ecdfligapro": "https://pecdl1.crackstreamslivehd.com/ecdf/tracks-v1a1/mono.m3u8?ip=45.224.153.13&token=49de0ba416b5bd667ab7b7acc4cd547d0b3163d0-bc-1757914065-1757860065",
-      "foxsports": "",
-      "foxsports2": "",
-      "foxsports3": "",
-      "tntsportsar": "https://qzv4jmsc.fubohd.com/tntsports/mono.m3u8?token=3e38c4a776acb6f641a2b6782bc641c97c90ae92-83-1757901803-1757883803",
-      "espnpremium": "https://tyg2mnl9.fubohd.com/espnpremium/mono.m3u8?token=0a8d6243f45d8b58c73b3344e5b87e5cfc6dfa01-53-1757727911-1757709911",
-      "tycsports": "",
-      "tycinternacional": "",
-      "telefe": "",
-      "tvpublica": "",
-      "golperu": "",
-      "liga1max": "https://57b1.crackstreamslivehd.com/liga1max/tracks-v1a1/mono.m3u8?ip=45.224.153.13&token=8f1eb5bd3e489834fca41c865b1bcdfdfb703769-69-1757929504-1757875504",
-      "movistar": "",
-      "winplus": "",
-      "winsports2": "https://14c51.crackstreamslivehd.com/winplus/tracks-v1a1/mono.m3u8?ip=45.224.153.13&token=9bd8972872b7561b3c4e4fdba5791aa5a5c6a70d-00-1757929200-1757875200",
-      "winsports": "",
-      "foxsportsmx": "",
-      "foxsports2mx": "",
-      "foxsports3mx": "",
-      "foxsportspremium": "http://cdn1501.cdnfree.live:2052/free15/330/playlist.m3u8?wmsAuthSign=c2VydmVyX3RpbWU9OS8xMy8yMDI1IDEwOjQ1OjA1IFBNJmhhc2hfdmFsdWU9UG41Zmh1L0tQNGhIeHdqR0h6VmFpdz09JnZhbGlkbWludXRlcz0yNDA=",
-      "tudn": "https://99a1.crackstreamslivehd.com/tudn_usa/tracks-v1a1/mono.m3u8?ip=45.224.153.13&token=53860e8769e5a1b19fc6d1cc9f5152e43d3b012b-4a-1757929955-1757875955",
-      "espnmx": "",
-      "espn2mx": "",
-      "espn3mx": "",
-      "espn4mx": "",
-      "calientetv": "",
-      "azteca7": "",
-      "canal5": "",
-      "tvcdeportes": "",
-      "aztecadeportes": "",
-      "hisports": "",
-      "skylaliga": "",
-      "skybundesliga": "",
-      "foxdeportes": "",
-      "espndeportes": "https://doc1.crackstreamslivehd.com:443/espndeportes/tracks-v1a1/mono.m3u8?ip=45.224.153.13&token=2c97dd7360582cbe9addaade7bef60096cc77cdc-03-1757908941-1757854941",
-      "tudnusa": "https://51a1.crackstreamslivehd.com:443/tudn_usa/tracks-v1a1/mono.m3u8?ip=45.224.153.13&token=d39e6fd943210455a448491c89f9c50d3dd606ba-2a-1757849896-1757795896",
-      "univision": "",
-      "foxdeportes1usa": "",
-      "foxdeportes2usa": "",
-      "tntsportschile": "https://24a1.crackstreamslivehd.com:443/tntsportschile/tracks-v1a1/mono.m3u8?ip=45.224.153.13&token=4660c3e88d17b79f1a2920332765f03f58d3434f-4e-1757754375-1757700375",
-      "disney1": "https://98ca2.crackstreamslivehd.com/espn/tracks-v1a1/mono.m3u8?ip=45.224.153.13&token=d5459e7659113c832b19a5b076fff2cbe8803e54-02-1758085280-1758031280",
-      "disney2": "https://8c51.crackstreamslivehd.com/espn/tracks-v1a1/mono.m3u8?ip=45.224.153.13&token=8e2b2b823c7109248331d71612c54002e7de41cf-20-1758085383-1758031383",
-      "disney3": "https://pecdl1.crackstreamslivehd.com:443/disney19/tracks-v1a1/mono.m3u8?ip=45.224.153.13&token=e570f3e9bd550b78e79f1466f9db3011e49c776b-6e-1757808739-1757754739",
-      "disney4": "https://98ca2.crackstreamslivehd.com/disney4/tracks-v1a1/mono.m3u8?ip=45.224.153.13&token=bbf9746dd121d79e47d2e5e9991c85f936280cb5-a5-1758078326-1758024326",
-      "disney5": "https://57b1.crackstreamslivehd.com/disney5/tracks-v1a1/mono.m3u8?ip=45.224.153.13&token=c456169f8e794706968f9d72711013e6bf092d0c-18-1757812881-1757758881",
-      "disney6": "https://99a1.crackstreamslivehd.com:443/disney6/tracks-v1a1/mono.m3u8?ip=45.224.153.13&token=aec26bbb24f8e12cb7ee96e112d2ddedb52e6791-41-1758078473-1758024473",
-      "disney7": "https://24a1.crackstreamslivehd.com:443/disney15/tracks-v1a1/mono.m3u8?ip=45.224.153.13&token=f680acee5ba1f5e311e54e65e1dff3d0688da738-71-1757930231-1757876231",
-      "disney8": "https://98ca2.crackstreamslivehd.com/disney8/tracks-v1a1/mono.m3u8?ip=45.224.153.13&token=48d26ac8bc63bbd78ca6ebd10f4a4072883bdf13-b0-1758078590-1758024590",
-      "disney9": "https://51a1.crackstreamslivehd.com:443/disney10/tracks-v1a1/mono.m3u8?ip=45.224.153.13&token=b4993ec805b7a196259fdf8e3f53417b028c401f-84-1757913324-1757859324",
-      "disney10": "https://pecdl1.crackstreamslivehd.com:443/disney12/tracks-v1a1/mono.m3u8?ip=45.224.153.13&token=0d38d042db0df85552cb3acadb725178e22a3462-4a-1757825946-1757771946",
-      "disney11": "https://pecdl1.crackstreamslivehd.com/disney11/tracks-v1a1/mono.m3u8?ip=45.224.153.13&token=b96b9927d1a6c7eaa3454bf6f28493240528b852-ab-1758078710-1758024710",
-      "disney12": "https://14c51.crackstreamslivehd.com/disney8/tracks-v1a1/mono.m3u8?ip=45.224.153.13&token=bf62823cf50d3777e2f5850f26f992300a7fcf27-aa-1757930304-1757876304",
-      "disney13": "https://florcd1.crackstreamslivehd.com/disney13/tracks-v1a1/mono.m3u8?ip=45.224.153.13&token=a06f660deb97cf1ec49e4ac0b6bdd73ce5cb1647-d1-1757900197-1757846197",
-      "disney14": "https://99a1.crackstreamslivehd.com/disney14/tracks-v1a1/mono.m3u8?ip=45.224.153.13&token=4fbb82a3440d5ca844dcf451909db34956792f9e-b0-1757900494-1757846494",
-      "disney15": "https://8c51.crackstreamslivehd.com/disney18/tracks-v1a1/mono.m3u8?ip=45.224.153.13&token=0737ccb0a3ca6b934ff950ffc8445f8350e63705-e4-1757900829-1757846829",
-      "disney16": "https://doc1.crackstreamslivehd.com:443/disney20/tracks-v1a1/mono.m3u8?ip=45.224.153.13&token=3b75bee7ac5689305db15c2ea025552e5eaca780-44-1757908875-1757854875",
-      "disney17": "https://pecdl1.crackstreamslivehd.com:443/espnplus1/tracks-v1a1/mono.m3u8?ip=45.224.153.13&token=48882f00c0a79de1f7972fa7ff09de480abf80b7-17-1757913990-1757859990",
-      "disney18": "https://99a1.crackstreamslivehd.com:443/eventos9/tracks-v1a1/mono.m3u8?ip=45.224.153.13&token=38d8a470625b25ca382e628f8b2efca046b2cea2-52-1757929362-1757875362",
-      "disney19": "",
-      "dinsey20": "",
-      "espn4": "",
-      "espn4": "",
-      "espn4": "",
-      "espn4": "",
-      "espn4": "",
-      "espn4": "",
-      "espn4": "",
-      "espn4": "",
-      "espn4": "",
-      "espn4": "",
-      "espn4": "",
-      "espn4": "",
-      "espn4": "",
-      "espn4": "",
-      "espn4": "",
-      "espn4": "",
-      "espn4": "",
-      "espn4": "",
-      "espn4": "",
-      "espn4": "",
-      "espn4": "",
-      "espn4": "",
-      "espn4": "",
-      "espn4": "",
-      "espn4": "",
-      "espn4": "",
-      "espn4": "",
-      "espn4": "",
-      "espn4": "",
-      "espn4": "",
-      "espn4": "",
-      "espn4": "",
-      "espn4": "",
-      "espn4": "",
-      "espn4": "",
-      "espn4": "",
-      "espn4": "",
-      "espn4": "",
-      "espn4": "",
-      "espn4": "",
-      "espn4": "",
-      "espn4": "",
-      "espn4": "",
-      "espn4": "",
-      "espn4": "",
-      "espn4": "",
-      "espn4": "",
-      "espn4": "",
-      "espn4": "",
-      "espn4": "",
-      "espn4": "",
-      "espn4": "",
-      "espn4": "",
-      "espn4": "",
-      "espn4": "",
-      "espn4": "",
-      "espn4": "",
-      "espn4": "",
-      "espn4": "",
-      "espn4": "",
-      "espn4": "",
-      "espn4": "",
-      "espn4": "",
-      "espn4": "",
-      "espn4": "",
-      "espn4": "",
-      "espn4": "",
-      "espn4": "",
-      "espn4": "",
-      "espn4": "",
-      "espn4": "",
-      "espn4": "",
-      "espn4": "",
-      "espn4": "",
-      "espn4": "",
-      "espn4": "",
-      "espn4": "",
-      "espn4": "",
-      "espn4": "",
-      "espn4": "",
-      "espn4": "",
-      "espn4": "",
-      "espn4": "",
-      "espn4": "",
-      "espn4": "",
-      "espn4": "",
-      "espn4": "",
-      "espn4": "",
-      "espn4": "",
-      "espn4": "",
-      "espn4": "",
-      "espn4": "",
-      "espn4": ""    
-      };
+      "disney1": "https://98ca2.crackstreamslivehd.com/espn/tracks-v1a1/mono.m3u8?...",
+      "espn": "https://14c51.crackstreamslivehd.com:443/espn/tracks-v1a1/mono.m3u8?...",
+      "espn2": "https://anvtcax.fubohd.com:443/espn2/mono.m3u8?...",
+      "dsports": "https://florcd1.crackstreamslivehd.com/dsports/tracks-v1a1/mono.m3u8?..."
+      // agrega los demás aquí
+    };
 
-    // Obtener parámetros de la URL
-  const params = new URLSearchParams(window.location.search);
-  const playParam = params.get("play");
-  const rParam = params.get("r");
+    // Leer parámetros de la URL
+    const params = new URLSearchParams(window.location.search);
+    let playbackURL = "";
 
-  let playbackURL = "";
-
-  if (rParam) {
-    // Si viene en Base64 → decodificar
-    playbackURL = atob(rParam);
-  } else if (playParam) {
-    // Si viene como texto → buscar en la lista
-    playbackURL = canales[playParam] || "";
-    // Opcional: actualizar la URL a formato Base64
-    if (playbackURL) {
-      const base64URL = btoa(playbackURL);
-      const nuevaURL = window.location.origin + window.location.pathname + "?r=" + base64URL;
-      window.history.replaceState({}, "", nuevaURL);
+    if (params.get("r")) {
+      playbackURL = atob(params.get("r"));
+    } else if (params.get("play")) {
+      playbackURL = canales[params.get("play")] || "";
     }
-  }
 
-  // Si no hay URL válida, mostrar error
-  if (!playbackURL) {
-    document.body.innerHTML = "<h2 style='color:white;text-align:center;margin-top:20%'>Canal no disponible</h2>";
-  } else {
-    // Configuración P2P
-    const p2pConfig = { live: true, trackerZone: "us" };
-
-    P2PEngineHls.tryRegisterServiceWorker(p2pConfig).then(() => {
+    // Si no hay canal válido
+    if (!playbackURL) {
+      document.body.innerHTML = "<h2 style='color:white;text-align:center;margin-top:20%'>Canal no disponible</h2>";
+    } else {
+      // Crear reproductor
       const player = new Clappr.Player({
         source: playbackURL,
         parentId: "#player",
@@ -266,65 +91,51 @@
         height: "100%",
         autoPlay: true,
         mediacontrol: { seekbar: "#D4ED31", buttons: "#FFFFFF" }
-        
-    });
+      });
 
-    p2pConfig.hlsjsInstance = player.core.getCurrentPlayback()?._hls;
-    const engine = new P2PEngineHls(p2pConfig);
-  });
-  }
+      // P2P opcional
+      try {
+        const p2pConfig = { live: true, trackerZone: "us", hlsjsInstance: player.core.getCurrentPlayback()?._hls };
+        new P2PEngineHls(p2pConfig);
+      } catch (e) {
+        console.log("P2P no cargó:", e);
+      }
+    }
   </script>
 
   <script>
-  // Detectar cuando Clappr entra en fullscreen
-  const playerContainer = document.getElementById('player');
-
-  // Función para forzar landscape en fullscreen
-  function lockLandscape() {
-    if (screen.orientation && screen.orientation.lock) {
-      screen.orientation.lock('landscape').catch(err => {
-        console.log('No se pudo bloquear orientación:', err);
-      });
+    // Bloqueo de orientación en fullscreen
+    function lockLandscape() {
+      if (screen.orientation && screen.orientation.lock) {
+        screen.orientation.lock("landscape").catch(err => {
+          console.log("No se pudo bloquear orientación:", err);
+        });
+      }
     }
-  }
 
-  // Escuchar eventos de fullscreen
-  playerContainer.addEventListener('fullscreenchange', () => {
-    if (document.fullscreenElement) {
-      lockLandscape(); // intento de bloquear horizontal
-    }
-  });
+    const playerContainer = document.getElementById("player");
+    playerContainer.addEventListener("fullscreenchange", () => {
+      if (document.fullscreenElement) lockLandscape();
+    });
+    playerContainer.addEventListener("webkitfullscreenchange", () => {
+      if (document.webkitFullscreenElement) lockLandscape();
+    });
+    playerContainer.addEventListener("mozfullscreenchange", () => {
+      if (document.mozFullScreenElement) lockLandscape();
+    });
+    playerContainer.addEventListener("msfullscreenchange", () => {
+      if (document.msFullscreenElement) lockLandscape();
+    });
 
-  // Para Chrome/Safari antiguos
-  playerContainer.addEventListener('webkitfullscreenchange', () => {
-    if (document.webkitFullscreenElement) lockLandscape();
-  });
-  playerContainer.addEventListener('mozfullscreenchange', () => {
-    if (document.mozFullScreenElement) lockLandscape();
-  });
-  playerContainer.addEventListener('msfullscreenchange', () => {
-    if (document.msFullscreenElement) lockLandscape();
-  });
-    const logo = document.getElementById('logo');
-
-document.addEventListener('fullscreenchange', () => {
-  if (document.fullscreenElement) {
-    document.fullscreenElement.appendChild(logo);
-  } else {
-    document.body.appendChild(logo); // volver a su lugar cuando se salga
-  }
-});
-
-</script>
-
-<script id='_wauqto'>
-  var _wau = _wau || [];
-  _wau.push([&quot;small&quot;, &quot;5uk6y9ukln&quot;, &quot;qto&quot;]);
-</script>
-<script async='async' src='//waust.at/s.js'/>
-</script>
-  
-  <!-- Bloqueador de anuncios -->
-  <script src="https://ads.tiogol.com/block.js?v=1.1"></script>
+    // Mover logo dentro de fullscreen
+    const logo = document.getElementById("logo");
+    document.addEventListener("fullscreenchange", () => {
+      if (document.fullscreenElement) {
+        document.fullscreenElement.appendChild(logo);
+      } else {
+        document.getElementById("player").appendChild(logo);
+      }
+    });
+  </script>
 </body>
 </html>
