@@ -2,10 +2,8 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>HSPORTSHD - Transmisión en Vivo</title>
-  <!-- Clappr -->
+  <title>HSPORTSHD - TRANSMISIÓN EN VIVO</title>
   <script src="https://cdn.jsdelivr.net/npm/@clappr/player@0.8/dist/clappr.min.js"></script>
-  <!-- P2P (opcional, no bloquea si falla) -->
   <script src="https://cdn.jsdelivr.net/npm/@swarmcloud/hls/p2p-engine.min.js"></script>
   <style>
     html, body {
@@ -24,7 +22,6 @@
       height: 100%;
       background: #000;
     }
-    /* Logo dentro del reproductor */
     #logo {
       position: absolute;
       top: 10px;
@@ -36,105 +33,83 @@
       height: auto;
       opacity: 0.9;
     }
-    /* Ajustes barra de progreso */
-    .media-control[data-media-control] 
-    .media-control-layer[data-controls] 
-    .bar-container[data-seekbar] 
-    .bar-background[data-seekbar] {
-      height: 5px !important;
-    }
-    .media-control[data-media-control] 
-    .media-control-layer[data-controls] 
-    .bar-container[data-seekbar]:hover 
-    .bar-background[data-seekbar] {
-      height: 7px !important;
-    }
   </style>
 </head>
 <body>
   <div id="player">
-    <!-- Logo flotante -->
     <div id="logo">
       <img src="https://i.ibb.co/sJmvqM4T/1000170748.png" alt="Logo">
     </div>
   </div>
 
   <script>
-    // Lista de canales
+    // Lista de canales HLS
     const canales = {
-      "disney1": "https://doc1.crackstreamslivehd.com:443/disney1/tracks-v1a1/mono.m3u8?ip=45.224.153.13&token=7f12c8f0a86c1ec3ad282f062ef739fdecf75980-25-1758114500-1758060500",
-      "espn": "https://14c51.crackstreamslivehd.com:443/espn/tracks-v1a1/mono.m3u8?...",
-      "espn2": "https://anvtcax.fubohd.com:443/espn2/mono.m3u8?...",
-      "dsports": "https://florcd1.crackstreamslivehd.com/dsports/tracks-v1a1/mono.m3u8?..."
-      // agrega los demás aquí
+      "disney1":"https://98ca2.crackstreamslivehd.com/espn/tracks-v1a1/mono.m3u8?ip=45.224.153.13&token=d5459e7659113c832b19a5b076fff2cbe8803e54-02-1758085280-1758031280",
+      "disney2":"https://8c51.crackstreamslivehd.com/espn/tracks-v1a1/mono.m3u8?ip=45.224.153.13&token=8e2b2b823c7109248331d71612c54002e7de41cf-20-1758085383-1758031383"
+      // puedes agregar el resto de canales aquí
     };
 
-    // Leer parámetros de la URL
-    const params = new URLSearchParams(window.location.search);
-    let playbackURL = "";
+    // Función para obtener parámetro y decodificar Base64
+    function getPlaybackURL() {
+      const params = new URLSearchParams(window.location.search);
+      const playParam = params.get("play");
+      const rParam = params.get("r");
+      let url = "";
 
-    if (params.get("r")) {
-      playbackURL = atob(params.get("r"));
-    } else if (params.get("play")) {
-      playbackURL = canales[params.get("play")] || "";
+      if (rParam) {
+        try { url = atob(rParam); } 
+        catch(e) { console.error("Error decodificando r:", e); }
+      } else if (playParam) {
+        url = canales[playParam] || "";
+        if(url) {
+          const base64URL = btoa(url);
+          const nuevaURL = window.location.origin + window.location.pathname + "?r=" + encodeURIComponent(base64URL);
+          window.history.replaceState({}, "", nuevaURL);
+        }
+      }
+      return url;
     }
 
-    // Si no hay canal válido
-    if (!playbackURL) {
+    const playbackURL = getPlaybackURL();
+
+    if(!playbackURL) {
       document.body.innerHTML = "<h2 style='color:white;text-align:center;margin-top:20%'>Canal no disponible</h2>";
     } else {
-      // Crear reproductor
-      const player = new Clappr.Player({
-        source: playbackURL,
-        parentId: "#player",
-        width: "100%",
-        height: "100%",
-        autoPlay: true,
-        mediacontrol: { seekbar: "#D4ED31", buttons: "#FFFFFF" }
-      });
+      // Configuración P2P
+      const p2pConfig = { live: true, trackerZone: "us" };
 
-      // P2P opcional
-      try {
-        const p2pConfig = { live: true, trackerZone: "us", hlsjsInstance: player.core.getCurrentPlayback()?._hls };
-        new P2PEngineHls(p2pConfig);
-      } catch (e) {
-        console.log("P2P no cargó:", e);
-      }
-    }
-  </script>
-
-  <script>
-    // Bloqueo de orientación en fullscreen
-    function lockLandscape() {
-      if (screen.orientation && screen.orientation.lock) {
-        screen.orientation.lock("landscape").catch(err => {
-          console.log("No se pudo bloquear orientación:", err);
+      P2PEngineHls.tryRegisterServiceWorker(p2pConfig).then(() => {
+        const player = new Clappr.Player({
+          source: playbackURL,
+          parentId: "#player",
+          width: "100%",
+          height: "100%",
+          autoPlay: true,
+          mediacontrol: { seekbar: "#D4ED31", buttons: "#FFFFFF" }
         });
-      }
+
+        p2pConfig.hlsjsInstance = player.core.getCurrentPlayback()?._hls;
+        new P2PEngineHls(p2pConfig);
+      });
     }
 
-    const playerContainer = document.getElementById("player");
-    playerContainer.addEventListener("fullscreenchange", () => {
-      if (document.fullscreenElement) lockLandscape();
-    });
-    playerContainer.addEventListener("webkitfullscreenchange", () => {
-      if (document.webkitFullscreenElement) lockLandscape();
-    });
-    playerContainer.addEventListener("mozfullscreenchange", () => {
-      if (document.mozFullScreenElement) lockLandscape();
-    });
-    playerContainer.addEventListener("msfullscreenchange", () => {
-      if (document.msFullscreenElement) lockLandscape();
+    // Logo en fullscreen
+    const logo = document.getElementById('logo');
+    document.addEventListener('fullscreenchange', () => {
+      if(document.fullscreenElement) document.fullscreenElement.appendChild(logo);
+      else document.body.appendChild(logo);
     });
 
-    // Mover logo dentro de fullscreen
-    const logo = document.getElementById("logo");
-    document.addEventListener("fullscreenchange", () => {
-      if (document.fullscreenElement) {
-        document.fullscreenElement.appendChild(logo);
-      } else {
-        document.getElementById("player").appendChild(logo);
+    // Intento de landscape
+    function lockLandscape() {
+      if(screen.orientation && screen.orientation.lock) {
+        screen.orientation.lock('landscape').catch(e=>console.log('No se pudo bloquear orientación:', e));
       }
+    }
+    const playerContainer = document.getElementById('player');
+    ['fullscreenchange','webkitfullscreenchange','mozfullscreenchange','msfullscreenchange'].forEach(ev=>{
+      playerContainer.addEventListener(ev, lockLandscape);
     });
   </script>
 </body>
