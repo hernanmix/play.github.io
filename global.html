@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Reproductor Global</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      background-color: black;
+      height: 100vh;
+      width: 100vw;
+    }
+    iframe {
+      border: none;
+      width: 100vw;
+      height: 100vh;
+    }
+    .error {
+      color: white;
+      text-align: center;
+      margin-top: 40vh;
+      font-size: 20px;
+    }
+  </style>
+</head>
+<body>
+  <script>
+    const canal = new URLSearchParams(window.location.search).get("channel");
+
+    fetch("canales.json")
+      .then(res => res.json())
+      .then(data => {
+        if (data[canal]) {
+          const iframe = document.createElement("iframe");
+          iframe.src = data[canal].url;
+          iframe.allowFullscreen = true;
+          document.body.appendChild(iframe);
+        } else {
+          document.body.innerHTML = "<div class='error'>Canal no encontrado</div>";
+        }
+      })
+      .catch(() => {
+        document.body.innerHTML = "<div class='error'>Error al cargar canales</div>";
+      });
+  </script>
+</body>
+</html>
