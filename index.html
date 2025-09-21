@@ -1,116 +1,623 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <title>HSPORTSHD - TRANSMISIÓN EN VIVO</title>
-  <script src="https://cdn.jsdelivr.net/npm/@clappr/player@0.8/dist/clappr.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@swarmcloud/hls/p2p-engine.min.js"></script>
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      width: 100%;
-      height: 100%;
-      background: #000;
-      overflow: hidden;
-    }
-    #player {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: #000;
-    }
-    #logo {
-      position: absolute;
-      top: 10px;
-      right: 80px;
-      z-index: 9999;
-    }
-    #logo img {
-      width: 80px;
-      height: auto;
-      opacity: 0.9;
-    }
-  </style>
-</head>
-<body>
-  <div id="player">
-    <div id="logo">
-      <img src="https://i.ibb.co/sJmvqM4T/1000170748.png" alt="Logo">
-    </div>
-  </div>
-
-  <script>
-    // Lista de canales HLS
-    const canales = {
-      "disney1":"https://98ca2.crackstreamslivehd.com/disney7/tracks-v1a1/mono.m3u8?ip=45.224.153.13&token=d98ebdc4a02a316777f066a52a87f6af6e41ba72-8e-1758345891-1758291891",
-      "disney2":"https://8c51.crackstreamslivehd.com/espn/tracks-v1a1/mono.m3u8?ip=45.224.153.13&token=8e2b2b823c7109248331d71612c54002e7de41cf-20-1758085383-1758031383"
-      // puedes agregar el resto de canales aquí
-    };
-
-    // Función para obtener parámetro y decodificar Base64
-    function getPlaybackURL() {
-      const params = new URLSearchParams(window.location.search);
-      const playParam = params.get("play");
-      const rParam = params.get("r");
-      let url = "";
-
-      if (rParam) {
-        try { url = atob(rParam); } 
-        catch(e) { console.error("Error decodificando r:", e); }
-      } else if (playParam) {
-        url = canales[playParam] || "";
-        if(url) {
-          const base64URL = btoa(url);
-          const nuevaURL = window.location.origin + window.location.pathname + "?r=" + encodeURIComponent(base64URL);
-          window.history.replaceState({}, "", nuevaURL);
-        }
-      }
-      return url;
-    }
-
-    const playbackURL = getPlaybackURL();
-
-    if(!playbackURL) {
-      document.body.innerHTML = "<h2 style='color:white;text-align:center;margin-top:20%'>Canal no disponible</h2>";
-    } else {
-      // Configuración P2P
-      const p2pConfig = { live: true, trackerZone: "us" };
-
-      P2PEngineHls.tryRegisterServiceWorker(p2pConfig).then(() => {
-        const player = new Clappr.Player({
-          source: playbackURL,
-          parentId: "#player",
-          width: "100%",
-          height: "100%",
-          autoPlay: true,
-          mediacontrol: { seekbar: "#D4ED31", buttons: "#FFFFFF" }
-        });
-
-        p2pConfig.hlsjsInstance = player.core.getCurrentPlayback()?._hls;
-        new P2PEngineHls(p2pConfig);
-      });
-    }
-
-    // Logo en fullscreen
-    const logo = document.getElementById('logo');
-    document.addEventListener('fullscreenchange', () => {
-      if(document.fullscreenElement) document.fullscreenElement.appendChild(logo);
-      else document.body.appendChild(logo);
-    });
-
-    // Intento de landscape
-    function lockLandscape() {
-      if(screen.orientation && screen.orientation.lock) {
-        screen.orientation.lock('landscape').catch(e=>console.log('No se pudo bloquear orientación:', e));
-      }
-    }
-    const playerContainer = document.getElementById('player');
-    ['fullscreenchange','webkitfullscreenchange','mozfullscreenchange','msfullscreenchange'].forEach(ev=>{
-      playerContainer.addEventListener(ev, lockLandscape);
-    });
-  </script>
-</body>
-</html>
+{
+  "spacemx": {
+    "url": "https://streamdp2.xyz/zk.html?id=SPACE"
+  },
+  "sportv7pt": {
+    "url": "https://playnow.wtf/player/9394"
+  },
+  "premier1uk": {
+    "url": "https://topembed.pw/channel/PremierSports1[UK]"
+  },
+  "dsports": {
+    "url": "https://elcanaldeportivo.com/directvsports.php"
+  },
+  "bandbr": {
+    "url": "https://reidoscanais.life/embed/?id=bandsports"
+  },
+  "espnbr": {
+    "url": "https://topembed.pw/channel/ESPNBrazil[Brazil]"
+  },
+  "espndeportes": {
+    "url": "https://streamtp22.com/global1.php?stream=espndeportes"
+  },
+  "telemundo": {
+    "url": "https://la14hd.com/vivo/canales.php?stream=telemundo"
+  },
+  "americatv": {
+    "url": "https://streamdp2.xyz/zk.html?id=AMERICAPE"
+  },
+  "atv": {
+    "url": "https://streamdp2.xyz/zk.html?id=ATV"
+  },
+  "latina": {
+    "url": "https://streamdp2.xyz/zk.html?id=LATINA"
+  },
+  "latinaop2": {
+    "url": "https://streamdp2.xyz/zk.html?id=LATINAOP2"
+  },
+  "bbc3": {
+    "url": "https://streamdp2.xyz/zk.html?id=BBC3"
+  },
+  "bbc2": {
+    "url": "https://streamdp2.xyz/zk.html?id=BBC2"
+  },
+  "fox1ar": {
+    "url": "https://streamdp2.xyz/html/zd.php?id=FoxSports1"
+  },
+  "fox2ar": {
+    "url": "https://streamdp2.xyz/html/zd.php?id=FoxSports2"
+  },
+  "fox3ar": {
+    "url": "https://streamdp2.xyz/html/zd.php?id=FoxSports3"
+  },
+  "fox3arop2": {
+    "url": "https://streamdp2.xyz/html/fl/?get=Rm94U3BvcnRzM0hE"
+  },
+  "foxdeportes": {
+    "url": "https://streamdp2.xyz/embed/fdus.html"
+  },
+  "espn3ar": {
+    "url": "https://streamdp2.xyz/html/zd.php?id=espn3"
+  },
+  "espnar": {
+    "url": "https://streamdp2.xyz/html/zd.php?id=espn1"
+  },
+  "espn2ar": {
+    "url": "https://streamdp2.xyz/html/zd.php?id=espn2"
+  },
+  "espn4ar": {
+    "url": "https://streamdp2.xyz/html/zd.php?id=espn4"
+  },
+  "telefear": {
+    "url": "https://elcanaldeportivo.com/telefe.php"
+  },
+  "tudnus": {
+    "url": "https://streamdp2.xyz/global1.php?channel=tudn_usa"
+  },
+  "hrt2": {
+    "url": "https://streamdp2.xyz/zk.html?id=HRT_2"
+  },
+  "meventos2": {
+    "url": "https://la14hd.com/vivo/canales.php?stream=movistar_eventos2"
+  },
+  "meventos1": {
+    "url": "https://la14hd.com/vivo/canales.php?stream=movistar"
+  },
+  "trecepy": {
+    "url": "https://streamdp2.xyz/zk.html?id=TRECEPY"
+  },
+  "canal11pt": {
+    "url": "https://topembed.pw/channel/Canal11[Portugal]"
+  },
+  "sportv2pt": {
+    "url": "https://topembed.pw/channel/SportTV2[Portugal]"
+  },
+  "daznf1": {
+    "url": "https://dlhd.dad/stream/stream-537.php"
+  },
+  "daznf1op2": {
+    "url": "https://dlhd.dad/plus/stream-537.php"
+  },
+  "npo3nl": {
+    "url": "https://streamdp2.xyz/zk.html?id=NPO3"
+  },
+  "latinape": {
+    "url": "https://streamdp2.xyz/zk.html?id=LATINAPE"
+  },
+  "universo_usa": {
+    "url": "https://streamtp22.com/global1.php?stream=universo_usa"
+  },
+  "universo_usa2": {
+    "url": "https://streamdp2.xyz/zk.html?id=UNIVERSOUS"
+  },
+  "beines": {
+    "url": "https://voodc.com/embed/85818b999e8b9a8c847a85959e8a98858780.html"
+  },
+  "beinxtraes": {
+    "url": "https://la14hd.com/vivo/canales.php?stream=beinsport_xtra_espanol"
+  },
+  "usa_network": {
+    "url": "https://streamtp22.com/global1.php?stream=usa_network"
+  },
+  "espnop2": {
+    "url": "https://la14hd.com/vivo/canales.php?stream=espn"
+  },
+  "tnt2uk": {
+    "url": "https://streamdp2.xyz/zk.html?id=TNTSPORTS2UK"
+  },
+  "tnt1uk": {
+    "url": "https://streamdp2.xyz/zk.html?id=TNTSPORTS1UK"
+  },
+  "ziggo1": {
+    "url": "https://streamdp2.xyz/zk.html?id=ZIGGO1"
+  },
+  "ziggo2": {
+    "url": "https://streamdp2.xyz/zk.html?id=ZIGGO2"
+  },
+  "ziggo3": {
+    "url": "https://streamdp2.xyz/zk.html?id=ZIGGO3"
+  },
+  "ziggo6": {
+    "url": "https://streamdp2.xyz/zk.html?id=ZIGGO6"
+  },
+  "ziggo5": {
+    "url": "https://streamdp2.xyz/zk.html?id=ZIGGO5"
+  },
+  "rtlde": {
+    "url": "https://streamdp2.xyz/zk.html?id=RTLDE"
+  },
+  "laune": {
+    "url": "https://streamdp2.xyz/zk.html?id=LAUNE_BE"
+  },
+  "italia1": {
+    "url": "https://streamdp2.xyz/zk.html?id=ITALIA_1"
+  },
+  "ssc1": {
+    "url": "https://streamdp2.xyz/zk.html?id=SSC1"
+  },
+  "sscextra1": {
+    "url": "https://streamdp2.xyz/zk.html?id=SSC_EXTRA1"
+  },
+  "ssc2": {
+    "url": "https://streamdp2.xyz/zk.html?id=SSC2"
+  },
+  "ssc3": {
+    "url": "https://streamdp2.xyz/zk.html?id=SSC3"
+  },
+  "hyper1": {
+    "url": "https://streamtp22.com/global1.php?stream=laligahypermotion"
+  },
+  "canale5": {
+    "url": "https://streamdp2.xyz/zk.html?id=CANALE5_IT"
+  },
+  "chv": {
+    "url": "https://streamdp2.xyz/embed/chv.html"
+  },
+  "rcn": {
+    "url": "https://elcanaldeportivo.com/caracol.php"
+  },
+  "rcnco": {
+    "url": "https://streamdp2.xyz/embed/rcn.html"
+  },
+  "rcn2": {
+    "url": "https://streamdp2.xyz/embed/rcn2.html"
+  },
+  "daserste": {
+    "url": "https://streamdp2.xyz/zk.html?id=DAS_ERSTE"
+  },
+  "caracoltv": {
+    "url": "https://elcanaldeportivo.com/caracol.php"
+  },
+  "golperu": {
+    "url": "https://streamdp2.xyz/global1.php?channel=golperu"
+  },
+  "fs2us": {
+    "url": "https://streamdp2.xyz/zk.html?id=FS2US"
+  },
+  "ppv1": {
+    "url": "https://streamdp2.xyz/zk.html?id=PPV1"
+  },
+  "arena1p": {
+    "url": "https://streamdp2.xyz/embed/arena1p.html"
+  },
+  "arena2p": {
+    "url": "https://streamdp2.xyz/embed/arena2p.html"
+  },
+  "arena3p": {
+    "url": "https://streamdp2.xyz/embed/arena3p.html"
+  },
+  "tigopy": {
+    "url": "https://streamtp22.com/global1.php?stream=eventos9"
+  },
+  "eventos1": {
+    "url": "https://voodc.com/embed/85818b99a08fa188847a8599a58898868d81.html"
+  },
+  "eventos2": {
+    "url": "https://voodc.com/embed/85818b99a08e9d84847a8598a28f98858a81.html"
+  },
+  "eventos3": {
+    "url": "https://voodc.com/embed/85818b99a08e9d84847a8598a38798858a83.html"
+  },
+  "eventos4": {
+    "url": "https://voodc.com/embed/85818b99a08e9d84847a8598a38898858b7a.html"
+  },
+  "eventos5": {
+    "url": "https://voodc.com/embed/85818b99a08e9d84847a8598a29098858a82.html"
+  },
+  "eventos6": {
+    "url": "https://voodc.com/embed/85818b99a08e9d84847a8598a38e98858b81.html"
+  },
+  "eventos7": {
+    "url": "https://voodc.com/embed/85818b99a08e9d84847a8598a38998858b7b.html"
+  },
+  "eventos8": {
+    "url": "https://voodc.com/embed/85818b99a08e9d84847a8598a38b98858b7d.html"
+  },
+  "eventos9": {
+    "url": "https://voodc.com/embed/85818b99a08f9a86847a8599a18798868880.html"
+  },
+  "eventos10": {
+    "url": "https://voodc.com/embed/85818b99a08f9c84847a8599a29098868a81.html"
+  },
+  "eventos11": {
+    "url": "https://voodc.com/embed/85818b99a08f9e85847a8599a38f98868b81.html"
+  },
+  "eventos12": {
+    "url": "https://voodc.com/embed/85818b99a08f9f8a847a8599a58998868d7a.html"
+  },
+  "eventos13": {
+    "url": "https://voodc.com/embed/85818b99a08fa188847a8599a58c9887847b.html"
+  },
+  "eventos14": {
+    "url": "https://voodc.com/embed/85818b99a08fa188847a8599a58d9887847c.html"
+  },
+  "eventos15": {
+    "url": "https://voodc.com/embed/85818b99a08fa188847a8599a58a98868d83.html"
+  },
+  "eventos16": {
+    "url": "https://voodc.com/embed/85818b99a08fa188847a8599a58b9887847a.html"
+  },
+  "eventos17": {
+    "url": "https://voodc.com/embed/85818b99a08fa188847a8599a58998868d82.html"
+  },
+  "eventos18": {
+    "url": "https://voodc.com/embed/85818b99a0909b84847a859a9d8e98878680.html"
+  },
+  "eventos19": {
+    "url": "https://voodc.com/embed/85818b99a0909e8a847a85959c8c98878780.html"
+  },
+  "eventos20": {
+    "url": "https://voodc.com/embed/85818b99a090a088847a85959d8c9887887e.html"
+  },
+  "eventos21": {
+    "url": "https://voodc.com/embed/85818b99a090a286847a85959e8d9887897f.html"
+  },
+  "eventos22": {
+    "url": "https://voodc.com/embed/85818b98a08da28a847a8595a1879886857d.html"
+  },
+  "eventos23": {
+    "url": "https://voodc.com/embed/85818b98a08da28a847a8595a18a98868580.html"
+  },
+  "eventos24": {
+    "url": "https://voodc.com/embed/85818b98a08da28a847a8595a1899886857f.html"
+  },
+  "eventos25": {
+    "url": "https://voodc.com/embed/85818b999f8ea08b847a85989c8a98898583.html"
+  },
+  "eventos26": {
+    "url": "https://voodc.com/embed/85818b999f8ea08b847a85989c8b9889867a.html"
+  },
+  "eventos27": {
+    "url": "https://voodc.com/embed/85818b97a190a188847a8595a58998898b83.html"
+  },
+  "eventos28": {
+    "url": "https://new.allover.top/hembedplayer/ligaes2/4/852/400"
+  },
+  "eventos29": {
+    "url": "https://voodc.com/embed/85818b989e8e9a8a847a8598a08f98858c7e.html"
+  },
+  "eventos30": {
+    "url": "https://streamdp2.xyz/es/?id=SETANTA2TL"
+  },
+  "max1": {
+    "url": "https://streamdp2.xyz/zk.html?id=MAX1"
+  },
+  "max2": {
+    "url": "https://streamtp22.com/global1.php?stream=max1"
+  },
+  "max3": {
+    "url": "https://streamtp22.com/global1.php?stream=max3"
+  },
+  "max4": {
+    "url": "https://streamtp22.com/global1.php?stream=max7"
+  },
+  "max5": {
+    "url": "https://streamtp22.com/global1.php?stream=max4"
+  },
+  "max6": {
+    "url": "https://streamtp22.com/global1.php?stream=max5"
+  },
+  "caliente1": {
+    "url": "https://streamdp2.xyz/es/?id=CALIENTE1"
+  },
+  "caliente2": {
+    "url": "https://streamdp2.xyz/es/?id=CALIENTE2"
+  },
+  "caliente3": {
+    "url": "https://streamdp2.xyz/es/?id=CALIENTE3"
+  },
+  "caliente4": {
+    "url": "https://streamdp2.xyz/es/?id=CALIENTE4"
+  },
+  "tntmx": {
+    "url": "https://streamdp2.xyz/zk.html?id=TNTMX"
+  },
+  "vtvplus": {
+    "url": "https://streamtp22.com/global1.php?stream=vtvplus"
+  },
+  "disney1": {
+    "url": "https://streamtp22.com/global1.php?stream=disney9"
+  },
+  "disney2": {
+    "url": "https://streamtp22.com/global1.php?stream=disney8"
+  },
+  "disney3": {
+    "url": "https://streamtp22.com/global1.php?stream=disney12"
+  },
+  "disney4": {
+    "url": "https://streamtp22.com/global1.php?stream=disney11"
+  },
+  "disney5": {
+    "url": "https://streamtp22.com/global1.php?stream=disney10"
+  },
+  "disney6": {
+    "url": "https://streamtp22.com/global1.php?stream=disney13"
+  },
+  "disney7": {
+    "url": "https://streamtp22.com/global1.php?stream=disney14"
+  },
+  "disney8": {
+    "url": "https://streamtp22.com/global1.php?stream=disney18"
+  },
+  "disney9": {
+    "url": "https://streamtp22.com/global1.php?stream=disney19"
+  },
+  "disney10": {
+    "url": "https://streamtp22.com/global1.php?stream=disney20"
+  },
+  "disney11": {
+    "url": "https://streamtp22.com/global1.php?stream=disney1"
+  },
+  "disney12": {
+    "url": "https://streamtp22.com/global1.php?stream=disney2"
+  },
+  "disney13": {
+    "url": "https://streamtp22.com/global1.php?stream=disney15"
+  },
+  "disney14": {
+    "url": "https://streamtp22.com/global1.php?stream=disney4"
+  },
+  "disney15": {
+    "url": "https://streamtp22.com/global1.php?stream=disney5"
+  },
+  "disney16": {
+    "url": "https://streamtp22.com/global1.php?stream=disney6"
+  },
+  "disney17": {
+    "url": "https://streamtp22.com/global1.php?stream=disney7"
+  },
+  "disney18": {
+    "url": "https://streamtp22.com/global1.php?stream=disney7"
+  },
+  "disney19": {
+    "url": "https://streamtp22.com/global1.php?stream=disney11"
+  },
+  "disney20": {
+    "url": "https://streamtp22.com/global1.php?stream=disney12"
+  },
+  "disney21": {
+    "url": "https://streamtp22.com/global1.php?stream=disney14"
+  },
+  "disney22": {
+    "url": "https://streamtp22.com/global1.php?stream=disney13"
+  },
+  "disney23": {
+    "url": "https://streamtp22.com/global1.php?stream=disney15"
+  },
+  "disney24": {
+    "url": "https://streamtp22.com/global1.php?stream=disney17"
+  },
+  "disney25": {
+    "url": "https://streamtp22.com/global1.php?stream=disney19"
+  },
+  "disney26": {
+    "url": "https://streamtp22.com/global1.php?stream=disney12"
+  },
+  "disney27": {
+    "url": "https://streamtp22.com/global1.php?stream=disney10"
+  },
+  "disney28": {
+    "url": "https://streamtp22.com/global1.php?stream=disney13"
+  },
+  "disney29": {
+    "url": "https://streamtp22.com/global1.php?stream=disney14"
+  },
+  "disney30": {
+    "url": "https://streamtp22.com/global1.php?stream=disney15"
+  },
+  "disney31": {
+    "url": "https://streamtp22.com/global1.php?stream=disney16"
+  },
+  "disney32": {
+    "url": "https://streamtp22.com/global1.php?stream=disney17"
+  },
+  "disney33": {
+    "url": "https://streamtp22.com/global1.php?stream=disney18"
+  },
+  "disney34": {
+    "url": "https://streamtp22.com/global1.php?stream=disney1"
+  },
+  "disney35": {
+    "url": "https://streamtp22.com/global1.php?stream=disney19"
+  },
+  "disney36": {
+    "url": "https://streamtp22.com/global1.php?stream=disney1"
+  },
+  "disney37": {
+    "url": "https://streamtp22.com/global1.php?stream=disney2"
+  },
+  "disney38": {
+    "url": "https://streamtp22.com/global1.php?stream=disney17"
+  },
+  "disney39": {
+    "url": "https://streamtp22.com/global1.php?stream=disney17"
+  },
+  "disney40": {
+    "url": "https://streamtp22.com/global1.php?stream=disney17"
+  },
+  "espnplus1": {
+    "url": "https://streamtp22.com/global1.php?stream=espndeportes"
+  },
+  "espnplus2": {
+    "url": "https://voodc.com/embed/85818b99a08d9d85847a8597a090988984.html"
+  },
+  "espnplus3": {
+    "url": "https://voodc.com/embed/85818b99a08e9b86847a8598a28798858982.html"
+  },
+  "espnplus4": {
+    "url": "https://voodc.com/embed/85818b99a08f9a86847a8599a18e9886897d.html"
+  },
+  "espnplus5": {
+    "url": "https://streamtp22.com/global1.php?stream=espndeportes"
+  },
+  "espnplus6": {
+    "url": "https://voodc.com/embed/85818b969c899e86847a8597a48c9885867f.html"
+  },
+  "espnplus7": {
+    "url": "https://voodc.com/embed/85818b969c899e86847a8597a48c9885867f.html"
+  },
+  "espnplus8": {
+    "url": "https://voodc.com/embed/85818b969c899e86847a8597a48c9885867f.html"
+  },
+  "TNTCL": {
+    "url": "https://elcanaldeportivo.com/cdf.php"
+  },
+  "TNTCL2": {
+    "url": "https://thedaddy.to/embed/stream-642.php"
+  },
+  "espnpremium": {
+    "url": "https://streamdp2.xyz/html/zd.php?id=espnpremium2"
+  },
+  "espnpremiumop2": {
+    "url": "https://la14hd.com/vivo/canales.php?stream=espnpremium"
+  },
+  "tntar": {
+    "url": "https://streamdp2.xyz/html/zd.php?id=tntsports2"
+  },
+  "tntarop2": {
+    "url": "https://la14hd.com/vivo/canales.php?stream=tntsports"
+  },
+  "tyc": {
+    "url": "https://rereyano.ru/player/3/77"
+  },
+  "tycop2": {
+    "url": "https://streamdp2.xyz/html/zd.php?id=TYC_SPORTS_21"
+  },
+  "sportv1br": {
+    "url": "https://streamdp2.xyz/zk.html?id=SPORTV1BR"
+  },
+  "sportv3br": {
+    "url": "https://streamdp2.xyz/zk.html?id=SPORTV3BR"
+  },
+  "premiere4br": {
+    "url": "https://streamdp2.xyz/zk.html?id=PREMIERE_BR_4"
+  },
+  "premiere6br": {
+    "url": "https://streamdp2.xyz/zk.html?id=PREMIERE_BR_6"
+  },
+  "premiere5br": {
+    "url": "https://streamdp2.xyz/zk.html?id=PREMIERE_BR_5"
+  },
+  "dazn1es": {
+    "url": "https://topembed.pw/channel/DAZN1[Spain]"
+  },
+  "eventos1mls": {
+    "url": "https://voodc.com/embed/85818b95a48a9d88847a85979e89988688.html"
+  },
+  "eventos1mx": {
+    "url": "https://voodc.com/embed/85818b969d899f84847a85959c8998858580.html"
+  },
+  "eventos2mx": {
+    "url": "https://voodc.com/embed/85818b969d8a9c86847a85959f8d9885897a.html"
+  },
+  "eventos3mx": {
+    "url": "https://voodc.com/embed/85818b969d8a9c86847a85959f8e9885897b.html"
+  },
+  "eventos4mx": {
+    "url": "https://voodc.com/embed/85818b969d8b9988847a8595a18998858a80.html"
+  },
+  "eventos5mx": {
+    "url": "https://voodc.com/embed/85818b94a18ea184847a8595a38f98878883.html"
+  },
+  "eventos1br": {
+    "url": "https://voodc.com/embed/85818b95a38f9b86847a85959f8f98878a80.html"
+  },
+  "eventos2br": {
+    "url": "https://voodc.com/embed/85818b95a188a288847a85989d8e9885887d.html"
+  },
+  "eventos3br": {
+    "url": "https://voodc.com/embed/85818b95a1899f8a847a85959e8d98858b7d.html"
+  },
+  "mls1": {
+    "url": "https://streamtp22.com/global1.php?stream=mls1es"
+  },
+  "mls2": {
+    "url": "https://voodc.com/embed/85818b95a48d9c86847a8599a18a98868a7d.html"
+  },
+  "mls3": {
+    "url": "https://voodc.com/embed/85818b95a48d9c86847a8599a18c98868a7f.html"
+  },
+  "mls4": {
+    "url": "https://voodc.com/embed/85818b95a48e9988847a85959e8798868c83.html"
+  },
+  "mls5": {
+    "url": "https://voodc.com/embed/85818b95a48ea08a847a85959e9098868d83.html"
+  },
+  "mls6": {
+    "url": "https://voodc.com/embed/85818b95a38f9e8c847a8595a39098888481.html"
+  },
+  "mls7": {
+    "url": "https://voodc.com/embed/85818b95a38f9e8c847a8595a48898888483.html"
+  },
+  "mls8": {
+    "url": "https://voodc.com/embed/85818b95a38f9e8c847a8595a38e9888847f.html"
+  },
+  "mls9": {
+    "url": "https://voodc.com/embed/85818b95a38f9f8b847a8595a48e9888857f.html"
+  },
+  "mls10": {
+    "url": "https://voodc.com/embed/85818b95a3909c84847a85969d8798888782.html"
+  },
+  "mls11": {
+    "url": "https://voodc.com/embed/85818b95a1899f8a847a85959e8d98858b7d.html"
+  },
+  "tf1": {
+    "url": "https://streamdp2.xyz/zk.html?id=TF1"
+  },
+  "sky2de": {
+    "url": "https://playnow.wtf/player/4549"
+  },
+  "sky3de": {
+    "url": "https://playnow.wtf/player/4551"
+  },
+  "sky4de": {
+    "url": "https://playnow.wtf/player/4552"
+  },
+  "tsn4": {
+    "url": "https://streamdp2.xyz/zk.html?id=TSN4_CA"
+  },
+  "tsn1": {
+    "url": "https://streamdp2.xyz/zk.html?id=TSN1CA"
+  },
+  "tsn3": {
+    "url": "https://streamdp2.xyz/zk.html?id=TSN3CA"
+  },
+  "liga1max": {
+    "url": "https://streamtp22.com/global1.php?stream=liga1max"
+  },
+  "espn": {
+    "url": "https://la14hd.com/vivo/canales.php?stream=espn"
+  },
+  "espn2": {
+    "url": "https://streamtp22.com/global1.php?stream=espn2"
+  },
+  "espnmx": {
+    "url": "https://streamtp22.com/global1.php?stream=espnmx"
+  },
+  "winplus": {
+    "url": "https://streamtp22.com/global1.php?stream=winplus"
+  },
+  "winplus2": {
+    "url": "https://streamtp22.com/global1.php?stream=winplus2"
+  }
+}
