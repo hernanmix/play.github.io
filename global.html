@@ -29,13 +29,16 @@
   <script>
     const canal = new URLSearchParams(window.location.search).get("channel");
 
-    fetch("canales.json")
+    fetch("https://raw.githubusercontent.com/hernanmix/play.github.io/main/canales.json")
       .then(res => res.json())
       .then(data => {
         if (data[canal]) {
           const iframe = document.createElement("iframe");
           iframe.src = data[canal].url;
           iframe.allowFullscreen = true;
+          iframe.style.width = "100vw";
+          iframe.style.height = "100vh";
+          iframe.style.border = "none";
           document.body.appendChild(iframe);
         } else {
           document.body.innerHTML = "<div class='error'>Canal no encontrado</div>";
