@@ -1,7 +1,6 @@
 (function() {
   const params = new URLSearchParams(window.location.search);
   const canal = params.get("channel");
-
   if (!canal) return;
 
   fetch("https://raw.githubusercontent.com/hernanmix/play.github.io/main/canales.json")
@@ -12,55 +11,42 @@
         return;
       }
 
-      const urlReal = data[canal].url;
-
+      const url = data[canal].url;
       const contenedor = document.createElement("div");
       contenedor.id = "player-container";
       contenedor.style = `
         position:fixed;
         top:0;
         left:0;
-        width:100%;
-        height:100%;
-        z-index:99999;
+        width:100vw;
+        height:100vh;
         background:#000;
-        display:flex;
-        justify-content:center;
-        align-items:center;
+        z-index:99999;
       `;
 
       const iframe = document.createElement("iframe");
-      iframe.src = urlReal;
-      iframe.setAttribute("allowfullscreen", "true");
-      iframe.setAttribute("scrolling", "no");
+      iframe.src = url;
+      iframe.allowFullscreen = true;
       iframe.style = "width:100%; height:100%; border:none;";
 
-      const closeBtn = document.createElement("button");
-      closeBtn.innerHTML = "✖";
-      closeBtn.style = `
+      const cerrar = document.createElement("button");
+      cerrar.innerHTML = "✖";
+      cerrar.style = `
         position:absolute;
         top:10px;
-        right:15px;
-        z-index:100000;
-        background:rgba(0,0,0,0.6);
+        right:10px;
+        background:#222;
         color:#fff;
         border:none;
-        font-size:24px;
-        cursor:pointer;
+        font-size:20px;
         padding:5px 10px;
-        border-radius:6px;
+        cursor:pointer;
+        z-index:100000;
       `;
-      closeBtn.onclick = () => {
-        contenedor.remove();
-        document.body.style.overflow = "";
-      };
+      cerrar.onclick = () => contenedor.remove();
 
       contenedor.appendChild(iframe);
-      contenedor.appendChild(closeBtn);
-      document.body.style.margin = "0";
-      document.body.style.padding = "0";
-      document.body.style.height = "100%";
-      document.body.style.overflow = "hidden";
+      contenedor.appendChild(cerrar);
       document.body.appendChild(contenedor);
     });
 })();
