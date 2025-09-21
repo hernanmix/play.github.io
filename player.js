@@ -4,7 +4,7 @@
 
   if (canal) {
     // Construir URL real del stream
-    const urlReal = "https://hernanmix.github.io/?channel=espn" + canal;
+    const urlReal = "https://raw.githubusercontent.com/hernanmix/play.github.io/main/canales.json" + canal;
 
     // Codificar en Base64
     const base64 = btoa(urlReal);
