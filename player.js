@@ -1,10 +1,10 @@
 (function() {
   const params = new URLSearchParams(window.location.search);
-  const canal = params.get("play");
+  const canal = params.get("channel");
 
   if (canal) {
     // Construir URL real del stream
-    const urlReal = "https://hernanmix.github.io/?play=espn" + canal;
+    const urlReal = "https://hernanmix.github.io/?channel=espn" + canal;
 
     // Codificar en Base64
     const base64 = btoa(urlReal);
