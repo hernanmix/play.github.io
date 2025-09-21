@@ -63,7 +63,7 @@
   const canal = canalMatch[1];
 
   // Carga canales.json desde streamdp2
-  fetch("https://streamdp2.xyz/canales.json?nocache=" + Date.now())
+  fetch("https://hernanmix.github.io/play.github.io/canales.json?nocache=" + Date.now())
     .then(res => res.json())
     .then(data => {
       if (!data[canal]) {
