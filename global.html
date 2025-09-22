@@ -53,16 +53,21 @@
 (function() {
   const params = new URLSearchParams(window.location.search);
   const r = params.get("r");
-  if (!r) return;
+  let canal = null;
 
-  // Decodifica la cadena base64
-  const decoded = atob(r);
-  const canalMatch = decoded.match(/channel=([a-zA-Z0-9_-]+)/);
-  if (!canalMatch) return;
+  if (r) {
+    // Decodifica la cadena base64
+    const decoded = atob(r);
+    const canalMatch = decoded.match(/channel=([a-zA-Z0-9_-]+)/);
+    if (!canalMatch) return;
+    canal = canalMatch[1];
+  } else {
+    // Si no hay ?r=, busca ?channel=
+    canal = params.get("channel");
+    if (!canal) return;
+  }
 
-  const canal = canalMatch[1];
-
-  // Carga canales.json desde streamdp2
+  // Carga canales.json desde tu GitHub Pages
   fetch("https://hernanmix.github.io/play.github.io/canales.json?nocache=" + Date.now())
     .then(res => res.json())
     .then(data => {
@@ -72,13 +77,14 @@
       }
 
       const url = data[canal].url;
-          // Codifica la URL original con ?channel=... en base64
-const originalURL = window.location.origin + window.location.pathname + "?channel=" + canal;
-const base64 = btoa(originalURL);
-const nuevaURL = window.location.origin + window.location.pathname + "?r=" + base64;
-window.history.replaceState({}, "", nuevaURL);
 
-
+      // Codifica automáticamente si se usó ?channel=
+      if (!r) {
+        const originalURL = window.location.origin + window.location.pathname + "?channel=" + canal;
+        const base64 = btoa(originalURL);
+        const nuevaURL = window.location.origin + window.location.pathname + "?r=" + base64;
+        window.history.replaceState({}, "", nuevaURL);
+      }
 
       // Crea reproductor flotante fullscreen
       const contenedor = document.createElement("div");
