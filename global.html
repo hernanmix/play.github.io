@@ -72,11 +72,11 @@
       }
 
       const url = data[canal].url;
-          if (window.location.search.includes("channel=")) {
-  const base64 = btoa(window.location.href);
-  const nuevaURL = window.location.origin + window.location.pathname + "?r=" + base64;
-  window.history.replaceState({}, "", nuevaURL);
-}
+          // Codifica la URL original con ?channel=... en base64
+const originalURL = window.location.origin + window.location.pathname + "?channel=" + canal;
+const base64 = btoa(originalURL);
+const nuevaURL = window.location.origin + window.location.pathname + "?r=" + base64;
+window.history.replaceState({}, "", nuevaURL);
 
 
 
