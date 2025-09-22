@@ -29,7 +29,7 @@
   <script>
     const canal = new URLSearchParams(window.location.search).get("channel");
 
-    fetch("https://raw.githubusercontent.com/hernanmix/play.github.io/main/canales.json")
+    fetch("https://raw.githubusercontent.com/hernanmix/play.github.io/main/canales.json?nocache=")
       .then(res => res.json())
       .then(data => {
         if (data[canal]) {
