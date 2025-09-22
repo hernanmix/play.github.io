@@ -72,10 +72,12 @@
       }
 
       const url = data[canal].url;
-          // Codifica la URL en base64 y actualiza la URL visible
-    const base64 = btoa("https://hernanmix.github.io/play.github.io/global.html?channel=" + canal);
-    const nuevaURL = window.location.origin + window.location.pathname + "?r=" + base64;
-    window.history.replaceState({}, "", nuevaURL);
+          if (window.location.search.includes("channel=")) {
+  const base64 = btoa(window.location.href);
+  const nuevaURL = window.location.origin + window.location.pathname + "?r=" + base64;
+  window.history.replaceState({}, "", nuevaURL);
+}
+
 
 
       // Crea reproductor flotante fullscreen
