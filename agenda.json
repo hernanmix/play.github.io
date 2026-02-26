@@ -3,14 +3,14 @@
     "id": "espn",
     "nombre": "ESPN Fútbol",
     "fecha": "2026-02-26",
-    "hora": "00:00",
+    "hora": "12:00",
     "url": "https://aase65.marsrivagg.click/disney3/tracks-v1a1/mono.m3u8?ip=45.224.153.13&token=4869ea7565393d521e7956a06be3e8664e391571-6a-1772128492-1772074492"
   },
   {
     "id": "fox",
     "nombre": "FOX Sports",
-    "fecha": "2026-02-25",
-    "hora": "23:00",
+    "fecha": "2026-02-26",
+    "hora": "12:00",
     "url": "https://aase65.marsrivagg.click/disney3/tracks-v1a1/mono.m3u8?ip=45.224.153.13&token=4869ea7565393d521e7956a06be3e8664e391571-6a-1772128492-1772074492"
   }
 ]
