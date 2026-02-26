@@ -1,0 +1,16 @@
+[
+  {
+    "id": "espn",
+    "nombre": "ESPN Fútbol",
+    "fecha": "2026-02-26",
+    "hora": "20:00",
+    "url": "https://servidor.com/espn.m3u8"
+  },
+  {
+    "id": "fox",
+    "nombre": "FOX Sports",
+    "fecha": "2026-02-26",
+    "hora": "22:00",
+    "url": "https://servidor.com/fox.m3u8"
+  }
+]
