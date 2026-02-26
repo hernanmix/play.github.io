@@ -26,6 +26,13 @@
     "fecha": "2026-02-26",
     "hora": "20:00",
     "url": ""
+  },
+  {
+    "id": "amazon",
+    "nombre": "NBA: Timberwolves vs Clippers",
+    "fecha": "2026-02-26",
+    "hora": "22:00",
+    "url": ""
   }
 ]
 
