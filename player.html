@@ -47,19 +47,15 @@ video {
 
       if (evento && evento.url) {
         jwplayer("player").setup({
-          file: evento.url,
-          type: evento.url.endsWith(".m3u8") ? "hls" : "dash",
-          autostart: true,
-          width: "100%",
-          height: "100%",
-          stretching: "uniform"
-        });
-      } else {
-        document.getElementById("player").innerHTML = "<p style='color:red'>Stream no encontrado</p>";
-      }
-    }
+  file: evento.url,
+  type: evento.url.endsWith(".m3u8") ? "hls" : "dash",
+  autostart: true,
+  width: "100%",
+  height: "100%",
+  stretching: "uniform",   // 🔹 importante
+  aspectratio: "16:9"      // 🔹 fuerza horizontal
+});
 
-    initPlayer();
   </script>
 </body>
 </html>
