@@ -18,21 +18,21 @@
   "status": "programado"
 },
   {
-  "id": "espn3",
-  "nombre": "LaLiga: Levante vs Deportivo Alavés",
-  "fecha": "2026-02-27",
-  "hora": "15:00",
+  "id": "teleamazonas",
+  "nombre": "Serie A: Barcelona vs Emelec",
+  "fecha": "2026-03-07",
+  "hora": "16:30",
   "url": "https://pvtn5y.envivoslatam.org/espnplus2/tracks-v1a1/mono.m3u8?ip=45.224.153.13&token=ce2e78194e48de0a7417678904c132cd4ca847bd-f2-1772267839-1772213839",
-  "duration": 123,
+  "duration": 125,
   "status": "programado"
   },
 {
-  "id": "espn3",
-  "nombre": "Serie A: Técnico Universitario vs Orense",
-  "fecha": "2026-02-27",
-  "hora": "19:30",
+  "id": "TELEAMZONAS",
+  "nombre": "Serie A: Libertad vs LDU Quito",
+  "fecha": "2026-03-07",
+  "hora": "19:00",
   "url": "https://cdn.lipsync.video/lipsync/cdn/upload/2026_02_28/027ca1e52f8041759c43cc95eef65861.mp4",
-  "duration": 123,
+  "duration": 125,
   "status": "programado"
 }
   
