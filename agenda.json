@@ -2,17 +2,17 @@
 {
   "id": "zappintv",
   "nombre": "MLS: DC United vs Inter Miami",
-  "fecha": "2026-03-07",
-  "hora": "23:00",
-  "url": "https://deportes.ksdjugfsddeports.com:9092/NDUuMjI0LjE1My4xMw==/43_.m3u8?token=q7k-_ipMijm-F9TQ8HMs6Q&expires=1772973869",
+  "fecha": "2026-03-09",
+  "hora": "09:00",
+  "url": "https://smarthard.click/hls/sabrouchespn5col/index.m3u8?st=X_5YuhLjxtJO0s2ypZGYow&e=1772666330",
   "duration": 125,
   "status": "programado"
 },
 {
   "id": "zappintv",
   "nombre": "Serie A: Independiente del Valle vs Mushuc Runa",
-  "fecha": "2026-03-07",
-  "hora": "16:30",
+  "fecha": "2026-03-09",
+  "hora": "09:30",
   "url": "https://jireh-5-hls-video-us-isp.dps.live/hls-video/c54ac2799874375c81c1672abb700870537c5223/ecuavisa/ecuavisa.smil/ecuavisa/livestream2/chunks.m3u8?dpssid=b13118599230866673999fdb969&ndvc=0&sid=ba5t1l1xb4922708609667399a247f4a",
   "duration": 125,
   "status": "programado"
@@ -20,8 +20,8 @@
   {
   "id": "teleamazonas",
   "nombre": "Serie A: Barcelona vs Emelec",
-  "fecha": "2026-03-07",
-  "hora": "16:30",
+  "fecha": "2026-03-09",
+  "hora": "09:00",
   "url": "https://pvtn5y.envivoslatam.org/espnplus2/tracks-v1a1/mono.m3u8?ip=45.224.153.13&token=ce2e78194e48de0a7417678904c132cd4ca847bd-f2-1772267839-1772213839",
   "duration": 125,
   "status": "programado"
@@ -29,8 +29,8 @@
 {
   "id": "TELEAMZONAS",
   "nombre": "Serie A: Libertad vs LDU Quito",
-  "fecha": "2026-03-07",
-  "hora": "19:00",
+  "fecha": "2026-03-09",
+  "hora": "09:00",
   "url": "https://cdn.lipsync.video/lipsync/cdn/upload/2026_02_28/027ca1e52f8041759c43cc95eef65861.mp4",
   "duration": 125,
   "status": "programado"
