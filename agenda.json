@@ -1,9 +1,9 @@
 [
 {
   "id": "Disne2",
-  "nombre": " Liga Argentina: San Lorenzo vs Boca Juniors",
+  "nombre": " NBA: Denver Nuggets vs Houston Rockets",
   "fecha": "2026-03-11",
-  "hora": "17:45",
+  "hora": "21:00",
   "url": "https://tyg2mnl9.fubohd.com/espnpremium/mono.m3u8?token=5d59f914b6a007a04ec81794a70803d406a8ed80-61-1773287068-1773269068",
   "duration": 125,
   "status": "programado"
@@ -23,7 +23,7 @@
   "fecha": "2026-03-11",
   "hora": "15:00",
   "url": "https://ssout.marsrivagg.click:443/disney4/tracks-v1a1/mono.m3u8?ip=45.224.153.13&token=003f27b3017998b89d73d385c414220b49f605eb-ca-1773306823-1773252823",
-  "duration": 125,
+  "duration": 1252,
   "status": "programado"
   },
 {
