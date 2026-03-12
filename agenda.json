@@ -28,33 +28,6 @@
 },
   {
   "id": "Disne2",
-  "nombre": " NBA: Indiana Pacers vs Phoenix Suns",
-  "fecha": "2026-03-12",
-  "hora": "18:00",
-  "url": "https://51a1.streameasthd.net:443/espn4/tracks-v1a1/mono.m3u8?ip=45.224.153.13&token=1c94cfc927dddc606926c72503f5fe7945a43d0e-ab-1773380668-1773326668",
-  "duration": 125,
-  "status": "programado"
-},
-  {
-  "id": "Disne2",
-  "nombre": " NBA: Atlanta Hawks vs Brooklyn Nets",
-  "fecha": "2026-03-12",
-  "hora": "18:30",
-  "url": "https://98ca2.streameasthd.net/espn4/tracks-v1a1/mono.m3u8?ip=45.224.153.13&token=08af7628753653809eea8ffdf8b5f6905b839974-d4-1773324149-1773270149",
-  "duration": 125,
-  "status": "programado"
-},
-  {
-  "id": "Disne2",
-  "nombre": " NBA: Miami Heat vs Milwaukee Bucks",
-  "fecha": "2026-03-12",
-  "hora": "18:30",
-  "url": "https://pecdl1.streameasthd.net:443/espn/tracks-v1a1/mono.m3u8?ip=45.224.153.13&token=f4a62a2ec91896deaa547f31baae454db868597f-ec-1773380710-1773326710",
-  "duration": 125,
-  "status": "programado"
-},
-  {
-  "id": "Disne2",
   "nombre": "Copa de Campeones de la Concacaf: Cincinnati vs Tigres UANL",
   "fecha": "2026-03-12",
   "hora": "19:00",
@@ -67,7 +40,7 @@
   "nombre": "Liga Profesional: Huracán vs River Plate",
   "fecha": "2026-03-12",
   "hora": "19:30",
-  "url": "https://ssout.marsrivagg.click:443/espn5/tracks-v1a1/mono.m3u8?ip=45.224.153.13&token=36b2c063559ea2325a2737ad89ed01a19514836a-4d-1773388307-1773334307",
+  "url": "https://fgg896.marsrivagg.click:443/tntar/tracks-v1a1/mono.m3u8?ip=45.224.153.13&token=b2b62f053656cefe5cf981ecd4ff6c823dd6729b-1e-1773402078-1773348078",
   "duration": 125,
   "status": "programado"
 },
