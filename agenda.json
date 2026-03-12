@@ -73,6 +73,62 @@
 },
   {
   "id": "Disne2",
+  "nombre": "UEFA Conference League: Crystal Palace vs AEK Larnaca",
+  "fecha": "2026-03-12",
+  "hora": "15:00",
+  "url": "https://98ca2.streameasthd.net/espn4/tracks-v1a1/mono.m3u8?ip=45.224.153.13&token=08af7628753653809eea8ffdf8b5f6905b839974-d4-1773324149-1773270149",
+  "duration": 125,
+  "status": "programado"
+},
+  {
+  "id": "Disne2",
+  "nombre": "UEFA Conference League: Sigma Olomouc vs Mainz 05",
+  "fecha": "2026-03-12",
+  "hora": "15:00",
+  "url": "https://98ca2.streameasthd.net/espn4/tracks-v1a1/mono.m3u8?ip=45.224.153.13&token=08af7628753653809eea8ffdf8b5f6905b839974-d4-1773324149-1773270149",
+  "duration": 125,
+  "status": "programado"
+},
+  
+  {
+  "id": "Disne2",
+  "nombre": "Liga Profesional: Deportivo Riestra vs Gimnasia Mendoza",
+  "fecha": "2026-03-12",
+  "hora": "15:00",
+  "url": "https://98ca2.streameasthd.net/espn4/tracks-v1a1/mono.m3u8?ip=45.224.153.13&token=08af7628753653809eea8ffdf8b5f6905b839974-d4-1773324149-1773270149",
+  "duration": 125,
+  "status": "programado"
+},
+  {
+  "id": "Disne2",
+  "nombre": "UEFA Europa League: Celta de Vigo vs Olympique Lyonnais",
+  "fecha": "2026-03-12",
+  "hora": "15:00",
+  "url": "https://98ca2.streameasthd.net/espn4/tracks-v1a1/mono.m3u8?ip=45.224.153.13&token=08af7628753653809eea8ffdf8b5f6905b839974-d4-1773324149-1773270149",
+  "duration": 125,
+  "status": "programado"
+},
+  {
+  "id": "Disne2",
+  "nombre": "UEFA Conference League: Fiorentina vs Raków Częstochowa",
+  "fecha": "2026-03-12",
+  "hora": "15:00",
+  "url": "https://98ca2.streameasthd.net/espn4/tracks-v1a1/mono.m3u8?ip=45.224.153.13&token=08af7628753653809eea8ffdf8b5f6905b839974-d4-1773324149-1773270149",
+  "duration": 125,
+  "status": "programado"
+},
+  
+  {
+  "id": "Disne2",
+  "nombre": "Liga Profesional: Defensa y Justicia vs Central Córdoba SdE",
+  "fecha": "2026-03-12",
+  "hora": "15:00",
+  "url": "https://98ca2.streameasthd.net/espn4/tracks-v1a1/mono.m3u8?ip=45.224.153.13&token=08af7628753653809eea8ffdf8b5f6905b839974-d4-1773324149-1773270149",
+  "duration": 125,
+  "status": "programado"
+},
+  {
+  "id": "Disne2",
   "nombre": " NBA: Denver Nuggets vs Houston Rockets",
   "fecha": "2026-03-11",
   "hora": "21:00",
