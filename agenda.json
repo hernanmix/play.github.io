@@ -7,33 +7,6 @@
   "url": "https://98ca2.streameasthd.net/espn4/tracks-v1a1/mono.m3u8?ip=45.224.153.13&token=08af7628753653809eea8ffdf8b5f6905b839974-d4-1773324149-1773270149",
   "duration": 125,
   "status": "programado"
-},
-{
-  "id": "Espn2",
-  "nombre": " CONCACAF Champions Cup: San Diego vs Toluca",
-  "fecha": "2026-03-11",
-  "hora": "10:30",
-  "url": "https://98ca2.streameasthd.net:443/tudn_usa/tracks-v1a1/mono.m3u8?ip=45.224.153.13&token=8705dec69ecda824ebbc360c63915a04f9675f34-68-1773324302-1773270302",
-  "duration": 126,
-  "status": "programado"
-},
-  {
-  "id": "Disney5",
-  "nombre": " UEFA Champions League: Bodø / Glimt vs Sporting CP ",
-  "fecha": "2026-03-11",
-  "hora": "15:00",
-  "url": "https://ssout.marsrivagg.click:443/disney4/tracks-v1a1/mono.m3u8?ip=45.224.153.13&token=003f27b3017998b89d73d385c414220b49f605eb-ca-1773306823-1773252823",
-  "duration": 125,
-  "status": "programado"
-  },
-{
-  "id": "Tnt sports",
-  "nombre": " Liga Profesional: Argentinos Juniors vs Rosario Central ",
-  "fecha": "2026-03-11",
-  "hora": "15:30",
-  "url": "https://fgg896.marsrivagg.click/tntar/tracks-v1a1/mono.m3u8?ip=45.224.153.13&token=f6c5eb506122a863cd0a10e0f2bcb652d3572dd7-6e-1773306884-1773252884",
-  "duration": 125,
-  "status": "programado"
 }
   
 ]
