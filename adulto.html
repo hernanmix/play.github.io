@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Canales</title>
+  <style>
+    body {
+      margin:0;
+      background:#000; /* fondo negro */
+      color:#fff;
+      font-family:Arial,sans-serif;
+    }
+    h1 {
+      text-align:center;
+      color:white;
+      margin:15px 0;
+    }
+    .menu {
+      display:grid;
+      gap:15px;
+      padding:15px;
+    }
+    /* 4 columnas en pantallas grandes */
+    @media (min-width:769px) {
+      .menu { grid-template-columns: repeat(4, 1fr); }
+    }
+    /* 2 columnas en pantallas pequeñas */
+    @media (max-width:768px) {
+      .menu { grid-template-columns: repeat(2, 1fr); }
+    }
+    .canal {
+      background:#111;
+      color:white;
+      padding:20px;
+      border-radius:8px;
+      text-align:center;
+      cursor:pointer;
+      border:2px solid #777; /* relieve plomo */
+      box-shadow: 2px 2px 6px #555;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+    .canal:hover {
+      transform: scale(1.05);
+    }
+    .canal:active {
+      opacity:0.6; /* efecto de esconderse al hacer clic */
+      transform: scale(0.95);
+    }
+  </style>
+</head>
+<body>
+
+<h1>Lista de Canales</h1>
+<div class="menu" id="menu"></div>
+
+<script>
+  // Lista de canales con enlaces "go:" o URLs
+  const canales = [
+    { nombre: "AdultIPTV.net Live Cams", enlace: "go:livecams" },
+    { nombre: "AdultIPTV.net MILF", enlace: "go:milf" },
+    { nombre: "AdultIPTV.net Big Dick", enlace: "go:bigdick" },
+    { nombre: "AdultIPTV.net Big Tits", enlace: "go:bigtits" },
+    { nombre: "AdultIPTV.net Fetish", enlace: "go:fetish" },
+    { nombre: "AdultIPTV.net Pornstar", enlace: "go:pornstar" }
+  ];
+
+  const menu = document.getElementById("menu");
+  canales.forEach(canal => {
+    const btn = document.createElement("div");
+    btn.className = "canal";
+    btn.textContent = canal.nombre;
+    btn.onclick = () => {
+      // Aquí se abre el enlace go: o URL
+      window.location.href = canal.enlace;
+    };
+    menu.appendChild(btn);
+  });
+</script>
+
+</body>
+</html>
+
