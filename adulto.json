@@ -1,25 +1,31 @@
 [
   {
+    "id": "livecams",
     "nombre": "AdultIPTV.net Live Cams",
     "url": "http://live.adultiptv.net/livecams.m3u8"
   },
   {
+    "id": "milf",
     "nombre": "AdultIPTV.net MILF",
     "url": "http://live.adultiptv.net/milf.m3u8"
   },
   {
+    "id": "bigdick",
     "nombre": "AdultIPTV.net Big Dick",
     "url": "http://live.adultiptv.net/bigdick.m3u8"
   },
   {
+    "id": "bigtits",
     "nombre": "AdultIPTV.net Big Tits",
     "url": "http://live.adultiptv.net/bigtits.m3u8"
   },
   {
+    "id": "fetish",
     "nombre": "AdultIPTV.net Fetish",
     "url": "http://live.adultiptv.net/fetish.m3u8"
   },
   {
+    "id": "pornstar",
     "nombre": "AdultIPTV.net Pornstar",
     "url": "http://live.adultiptv.net/pornstar.m3u8"
   }
