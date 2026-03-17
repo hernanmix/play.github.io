@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Adult</title>
+  <title>Adulto</title>
   <script src="https://cdn.jsdelivr.net/npm/jwplayer@latest/jwplayer.js"></script>
   <style>
     body {
@@ -24,38 +24,48 @@
       width:100%;
     }
     .menu {
-      display:flex;
-      flex-direction:column;
+      display:grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
       gap:10px;
       padding:10px;
       background:#111;
       overflow-y:auto;
-      max-height:35vh; /* lista ocupa parte inferior */
+      max-height:40vh; /* lista ocupa parte inferior */
     }
     .canal {
       display:flex;
+      flex-direction:column;
       align-items:center;
-      gap:10px;
+      justify-content:center;
       background:#0b90c5;
       color:#fff;
       padding:15px;
       border-radius:6px;
       cursor:pointer;
-      font-size:16px;
+      text-align:center;
     }
     .canal img {
-      width:60px;
-      height:60px;
-      border-radius:4px;
+      width:80px;
+      height:80px;
+      border-radius:6px;
+      margin-bottom:8px;
     }
     .canal span {
-      flex:1;
+      font-size:14px;
+      font-weight:bold;
+    }
+    /* Responsivo: 3 columnas en móvil, 4 en escritorio */
+    @media (max-width:768px) {
+      .menu { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (min-width:769px) {
+      .menu { grid-template-columns: repeat(4, 1fr); }
     }
   </style>
 </head>
 <body>
 
-  <h1>Adult</h1>
+  <h1>Adulto</h1>
   <div id="player"></div>
   <div class="menu" id="menu"></div>
 
@@ -80,7 +90,7 @@
         data.forEach(canal => {
           const btn = document.createElement("div");
           btn.className = "canal";
-          btn.innerHTML = `<img src="${canal.logo}" alt=""><span>${canal.nombre} (${canal.grupo})</span>`;
+          btn.innerHTML = `<img src="${canal.logo}" alt=""><span>${canal.nombre}</span>`;
           btn.onclick = () => {
             jwplayer("player").load([{ file: canal.url }]);
             jwplayer("player").play();
@@ -98,3 +108,4 @@
 
 </body>
 </html>
+
