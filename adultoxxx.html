@@ -6,7 +6,7 @@
   <script src="https://cdn.jsdelivr.net/npm/jwplayer@latest/jwplayer.js"></script>
   <style>
     body {margin:0; background:#000; color:#fff; font-family:Arial,sans-serif;}
-    #player {width:100%; height:100vh;} /* ocupa toda la ventana */
+    #player {width:100%; height:70vh;} /* reproductor ocupa 70% de la ventana */
     .menu {display:flex; flex-wrap:wrap; gap:10px; justify-content:center; padding:10px; background:#111;}
     .canal {display:flex; align-items:center; gap:8px; background:#0b90c5; color:#fff; padding:8px 12px; border-radius:6px; cursor:pointer;}
     .canal img {width:32px; height:32px; border-radius:4px;}
@@ -28,7 +28,7 @@
     });
 
     // Cargar lista de canales desde JSON externo
-    fetch("https://hernanmix.github.io/play.github.io/adulto.json")
+    fetch("adulto.json")
       .then(response => response.json())
       .then(data => {
         const menu = document.getElementById("menu");
@@ -47,7 +47,8 @@
           jwplayer("player").load([{ file: data[0].url }]);
           jwplayer("player").play();
         }
-      });
+      })
+      .catch(err => console.error("Error cargando JSON:", err));
   </script>
 
 </body>
