@@ -5,34 +5,37 @@
   <title>Reproductor TV</title>
   <script src="https://cdn.jsdelivr.net/npm/jwplayer@latest/jwplayer.js"></script>
   <style>
-    body {background:#000; color:#fff; font-family:Arial,sans-serif;}
-    #player {width:100%; height:480px; margin:20px auto;}
-    .menu {display:flex; flex-wrap:wrap; gap:10px; justify-content:center;}
-    .menu button {padding:10px 20px; border:none; border-radius:6px; cursor:pointer; background:#0b90c5; color:#fff;}
+    body {margin:0; background:#000; color:#fff; font-family:Arial,sans-serif;}
+    #player {width:100%; height:100vh;} /* ocupa toda la ventana */
+    .menu {display:flex; flex-wrap:wrap; gap:10px; justify-content:center; padding:10px; background:#111;}
+    .canal {display:flex; align-items:center; gap:8px; background:#0b90c5; color:#fff; padding:8px 12px; border-radius:6px; cursor:pointer;}
+    .canal img {width:32px; height:32px; border-radius:4px;}
   </style>
 </head>
 <body>
-
-  <h2 style="text-align:center;">Mi Reproductor TV</h2>
 
   <div id="player"></div>
   <div class="menu" id="menu"></div>
 
   <script>
+    // Inicializa JW Player vacío
     jwplayer("player").setup({
       file: "",
       width: "100%",
       height: "100%",
-      autostart: false
+      autostart: false,
+      stretching: "uniform" // evita márgenes negros
     });
 
-    fetch("https://hernanmix.github.io/play.github.io/adulto.json")
+    // Cargar lista de canales desde JSON externo
+    fetch("adulto.json")
       .then(response => response.json())
       .then(data => {
         const menu = document.getElementById("menu");
         data.forEach(canal => {
-          const btn = document.createElement("button");
-          btn.textContent = canal.nombre;
+          const btn = document.createElement("div");
+          btn.className = "canal";
+          btn.innerHTML = `<img src="${canal.logo}" alt=""> <span>${canal.nombre} (${canal.grupo})</span>`;
           btn.onclick = () => {
             jwplayer("player").load([{ file: canal.url }]);
             jwplayer("player").play();
@@ -42,6 +45,7 @@
         // Cargar el primer canal automáticamente
         if (data.length > 0) {
           jwplayer("player").load([{ file: data[0].url }]);
+          jwplayer("player").play();
         }
       });
   </script>
