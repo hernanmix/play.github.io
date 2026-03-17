@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es"> 
+<html lang="es">
 <head>
   <meta charset="UTF-8">
   <title>Lista de Canales</title>
@@ -65,7 +65,10 @@
 
     // Cargar lista de canales desde tu JSON en GitHub
     fetch("https://hernanmix.github.io/play.github.io/adulto.json")
-      .then(response => response.json())
+      .then(response => {
+        if (!response.ok) throw new Error("No se pudo cargar el JSON");
+        return response.json();
+      })
       .then(data => {
         const menu = document.getElementById("menu");
         data.forEach(canal => {
@@ -89,3 +92,4 @@
 
 </body>
 </html>
+
