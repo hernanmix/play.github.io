@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Eventos en VIVO - </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+  <style>
+    body {
+      margin: 0;
+      background-color: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+    }
+
+    .header {
+      background-color: #0b90c5;
+      padding: 10px;
+      text-align: center;
+    }
+
+    .header img {
+      width: 220px;
+      height: 40px;
+    }
+
+    .iframe-container {
+      position: relative;
+      width: 100%;
+      padding-top: 56.25%;
+      border-radius: 10px;
+      overflow: hidden;
+      margin: 20px auto;
+    }
+
+    .iframe-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .alert {
+      background-color: #f0ad4e;
+      color: #000;
+      padding: 10px;
+      margin: 20px auto;
+      border-radius: 8px;
+      max-width: 600px;
+      position: relative;
+    }
+
+    .alert .closebtn {
+      position: absolute;
+      top: 5px;
+      right: 10px;
+      font-size: 20px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .btn-md {
+      background-color: #0b90c5;
+      color: #fff;
+      padding: 10px 26px;
+      border-radius: 12px;
+      font-size: 16px;
+      margin: 20px auto;
+      display: block;
+      width: 90%;
+      max-width: 400px;
+      border: none;
+      cursor: pointer;
+    }
+
+    footer {
+      text-align: center;
+      color: #aaa;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <a href="/">
+      <img src="/img/dptvhd.png" alt="HSPORTSHD">
+    </a>
+  </div>
+
+  <div class="alert" id="alerta">
+    <span class="closebtn" onclick="document.getElementById('alerta').style.display='none';">❌</span>
+    🚨 <strong>ATENCIÓN:</strong> Si presentas problemas con algunas señales o acceso a la web te recomiendo uses una VPN, cambio de DNS en tu navegador o puedes usar <a href="https://one.one.one.one" target="_blank">Cloudflare DNS</a>.Con esto evitas el bloqueo de tu proveedor a nuestra web y así disfrutas del contenido.
+  </div>
+
+  <h3 style="text-align:center;">Eventos - HSPORTSTVHD</h3>
+
+  <div class="iframe-container">
+    <script>
+      function getParameterByName(name) {
+        name = name.replace(/[
+
+\[]/, "\
+
+\[").replace(/[\]
+
+]/, "\\]
+
+");
+        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+            results = regex.exec(location.search);
+        return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+      }
+
+      var embed = getParameterByName('embed') || getParameterByName('r') || false;
+
+      if (embed) {
+        document.write('<iframe class="embed-responsive-item" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen src="'?showinfo=0'" scrolling="no" frameBorder="0" allowfullscreen></iframe>');}else{document.write('<img class="embed-responsive-item" src="https://pbs.twimg.com/media/DjY2G6tV4AA5-0p.jpg" width="100%">')}
+                        </script>
+      <iframe class="embed-responsive-item" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen="" src="https://brit.287wd0wifeqsjrfought.cfd/es/player.html?mdata=NDM3MjAxNV8x&amp;ilang=es" scrolling="no"></iframe>
+  </div>
+  
+
+  <button class="btn-md" onclick="location.reload()">🔄 Recargar reproductor</button>
+
+  <footer>
+    <h5>HSPORTSHD © Todos los derechos reservados.</h5>
+    <a href="#" rel="nofollow">DMCA</a>
+  </footer>
+</body>
+</html>
